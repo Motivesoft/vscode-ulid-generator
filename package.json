@@ -1,0 +1,66 @@
+{
+  "name": "vscode-ulid-generator",
+  "displayName": "ULID Generator",
+  "description": "An extension to generate Universally Unique Lexicographically Sortable Identifiers, known as ULID",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-ulid-generator.insert",
+        "title": "Insert new ULID"
+      },
+      {
+        "command": "vscode-ulid-generator.copy",
+        "title": "Copy new ULID to the clipboard"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "ULID Generator",
+        "properties": {
+					"vscode-ulid-generator.textSelection": {
+						"type": "boolean",
+						"default": false,
+						"description": "Whether to add the inserted ULID to the current selection"
+					}
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.8",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.94.0",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.11.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "ulid": "^2.3.0"
+  }
+}
