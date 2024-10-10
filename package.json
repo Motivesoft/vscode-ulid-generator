@@ -2,7 +2,7 @@
   "name": "vscode-ulid-generator",
   "displayName": "ULID Generator",
   "description": "An extension to generate Universally Unique Lexicographically Sortable Identifiers, known as ULID",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.94.0"
   },
@@ -26,14 +26,28 @@
       {
         "title": "ULID Generator",
         "properties": {
-					"vscode-ulid-generator.textSelection": {
+					"vscode-ulid-generator.seedTime": {
+						"type": "integer",
+						"default": 0,
+						"description": "Enter seed time to consistently give the same string for the time component. Useful when migrating to ULID"
+					},
+					"vscode-ulid-generator.contextMenu.enabled": {
 						"type": "boolean",
-						"default": false,
-						"description": "Whether to add the inserted ULID to the current selection"
+						"default": true,
+						"description": "Whether to show the Insert new ULID function in the editor context menu"
 					}
         }
       }
-    ]
+    ],
+    "menus": {
+			"editor/context": [
+				{
+					"command": "vscode-ulid-generator.insert",
+					"group": "motivesoft",
+					"when": "config.vscode-ulid-generator.contextMenu.enabled"
+				}
+			]
+		}
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

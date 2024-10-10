@@ -50,11 +50,6 @@ function activate(context) {
         if (editor) {
             editor.edit(edit => {
                 editor?.selections.forEach(v => edit.replace(v, makeUlid()));
-            }).then(success => {
-                var select = vscode.workspace.getConfiguration().get("vscode-ulid-generator.textSelection");
-                if (success && editor && !select) {
-                    editor.selection = new vscode.Selection(editor.selection.end, editor.selection.end);
-                }
             });
         }
     }));
@@ -66,7 +61,15 @@ function activate(context) {
     }));
 }
 function makeUlid() {
-    return (0, ulid_1.ulid)();
+    const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime");
+    var ulidValue;
+    if (seedTime > 0) {
+        ulidValue = (0, ulid_1.ulid)(seedTime);
+    }
+    else {
+        ulidValue = (0, ulid_1.ulid)();
+    }
+    return ulidValue;
 }
 // This method is called when your extension is deactivated
 function deactivate() { }

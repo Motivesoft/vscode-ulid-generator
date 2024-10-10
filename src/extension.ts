@@ -21,11 +21,6 @@ export function activate(context: vscode.ExtensionContext) {
         if (editor) {
 			editor.edit( edit => {
 				editor?.selections.forEach( v => edit.replace( v, makeUlid() ) );
-			} ).then( success => {
-				var select = vscode.workspace.getConfiguration().get("vscode-ulid-generator.textSelection");
-				if( success && editor && !select ) {
-					editor.selection = new vscode.Selection( editor.selection.end, editor.selection.end );
-				}
 			} );
 		}
 	}));
@@ -41,7 +36,17 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function makeUlid() : string {
-	return ulid();
+	const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime") as number;
+
+	var ulidValue;
+	if( seedTime > 0 )
+	{
+		ulidValue = ulid(seedTime);
+	} else {
+		ulidValue = ulid();
+	}
+	
+	return ulidValue;
 }
 
 // This method is called when your extension is deactivated
