@@ -31,10 +31,20 @@
 						"default": 0,
 						"description": "Enter seed time to consistently give the same string for the time component. Useful when migrating to ULID"
 					},
-					"vscode-ulid-generator.contextMenu.enabled": {
+					"vscode-ulid-generator.monotonic": {
+						"type": "boolean",
+						"default": false,
+						"description": "Enable to generate monotonically increasing ULIDs"
+					},
+					"vscode-ulid-generator.contextMenu.insertULID": {
 						"type": "boolean",
 						"default": true,
 						"description": "Whether to show the Insert new ULID function in the editor context menu"
+					},
+					"vscode-ulid-generator.multiCursorBehavior": {
+						"type": "boolean",
+						"default": true,
+						"description": "When using multiple cursors, create the ULIDs in a top-down order"
 					}
         }
       }
@@ -44,7 +54,7 @@
 				{
 					"command": "vscode-ulid-generator.insert",
 					"group": "motivesoft",
-					"when": "config.vscode-ulid-generator.contextMenu.enabled"
+					"when": "config.vscode-ulid-generator.contextMenu.insertULID"
 				}
 			]
 		}

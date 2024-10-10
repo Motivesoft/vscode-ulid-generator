@@ -35,39 +35,53 @@ exports.deactivate = deactivate;
 // Import the module and reference it with the alias vscode in your code below
 const vscode = __importStar(__webpack_require__(1));
 const ulid_1 = __webpack_require__(2);
+const ulid_2 = __webpack_require__(2);
+const monotonicFunction = (0, ulid_2.monotonicFactory)();
+const ulidFunction = ulid_1.ulid;
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 function activate(context) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
     console.log('"vscode-ulid-generator" is now active');
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
     context.subscriptions.push(vscode.commands.registerCommand('vscode-ulid-generator.insert', () => {
-        // Generate the ULID and insert it at the current edit point
+        const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime");
+        const useMonotonic = vscode.workspace.getConfiguration().get("vscode-ulid-generator.monotonic");
+        const sortMultiCursorSelections = vscode.workspace.getConfiguration().get("vscode-ulid-generator.multiCursorBehavior");
+        // Generate the ULID and insert it at the current edit point(s)
         let editor = vscode.window.activeTextEditor;
         if (editor) {
             editor.edit(edit => {
-                editor?.selections.forEach(v => edit.replace(v, makeUlid()));
+                var editorSelections;
+                if (sortMultiCursorSelections) {
+                    // Take the editor selections and sort them based on location in the editor.
+                    // If we didn't, the natural order of the list would be the order in which the
+                    // items were selected, which could be wrong for our use case given the ULIDs
+                    // are ordered.
+                    editorSelections = [...editor.selections].sort((a, b) => a.start.compareTo(b.start));
+                }
+                else {
+                    editorSelections = editor.selections;
+                }
+                editorSelections.forEach(v => edit.replace(v, makeUlid(seedTime, useMonotonic)));
             });
         }
     }));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-ulid-generator.copy', () => {
+        const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime");
+        const useMonotonic = vscode.workspace.getConfiguration().get("vscode-ulid-generator.monotonic");
         // Generate UUID and add it to the clipboard
-        vscode.env.clipboard.writeText(makeUlid());
+        vscode.env.clipboard.writeText(makeUlid(seedTime, useMonotonic));
         // Display a message box to the user
         vscode.window.showInformationMessage('ULID copied to clipboard');
     }));
 }
-function makeUlid() {
-    const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime");
+function makeUlid(seedTime, useMonotonic) {
+    const ulid = useMonotonic ? monotonicFunction : ulidFunction;
     var ulidValue;
     if (seedTime > 0) {
-        ulidValue = (0, ulid_1.ulid)(seedTime);
+        ulidValue = ulid(seedTime);
     }
     else {
-        ulidValue = (0, ulid_1.ulid)();
+        ulidValue = ulid();
     }
     return ulidValue;
 }

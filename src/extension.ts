@@ -3,31 +3,47 @@
 import * as vscode from 'vscode';
 
 import { ulid } from 'ulid';
+import { monotonicFactory } from 'ulid';
+
+const monotonicFunction = monotonicFactory();
+const ulidFunction = ulid;
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
 	console.log('"vscode-ulid-generator" is now active');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
 	context.subscriptions.push(vscode.commands.registerCommand('vscode-ulid-generator.insert', () => {
-		// Generate the ULID and insert it at the current edit point
+		const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime") as number;
+		const useMonotonic = vscode.workspace.getConfiguration().get("vscode-ulid-generator.monotonic") as boolean;
+		const sortMultiCursorSelections = vscode.workspace.getConfiguration().get("vscode-ulid-generator.multiCursorBehavior") as boolean;
+	
+		// Generate the ULID and insert it at the current edit point(s)
 		let editor = vscode.window.activeTextEditor;
         if (editor) {
 			editor.edit( edit => {
-				editor?.selections.forEach( v => edit.replace( v, makeUlid() ) );
+				var editorSelections;
+				if(sortMultiCursorSelections) {
+					// Take the editor selections and sort them based on location in the editor.
+					// If we didn't, the natural order of the list would be the order in which the
+					// items were selected, which could be wrong for our use case given the ULIDs
+					// are ordered.
+					editorSelections = [...editor.selections].sort((a, b) => a.start.compareTo( b.start ));
+				} else {
+					editorSelections = editor.selections;
+				}
+
+				editorSelections.forEach( v => edit.replace( v, makeUlid(seedTime, useMonotonic) ) );
 			} );
 		}
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('vscode-ulid-generator.copy', () => {
+		const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime") as number;
+		const useMonotonic = vscode.workspace.getConfiguration().get("vscode-ulid-generator.monotonic") as boolean;
+
 		// Generate UUID and add it to the clipboard
-		vscode.env.clipboard.writeText( makeUlid() );
+		vscode.env.clipboard.writeText( makeUlid(seedTime, useMonotonic) );
 		
 		// Display a message box to the user
 		vscode.window.showInformationMessage('ULID copied to clipboard');
@@ -35,8 +51,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 }
 
-function makeUlid() : string {
-	const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime") as number;
+function makeUlid(seedTime: number, useMonotonic: boolean) : string {
+	const ulid = useMonotonic ? monotonicFunction : ulidFunction;
 
 	var ulidValue;
 	if( seedTime > 0 )
