@@ -10,60 +10,43 @@ A comparison of the benefits of ULID over UUID and others can be found in the [c
 
 From the command palette or editor context menu, one of more ULIDs can be placed into the current editor, or a single ULID placed onto the clipboard.
 
+The commands appear in the command palette as:
+* Insert new ULID
+* Copy new ULID to the clipboard
+
+The option to insert a new ULID into the current editor is also available from the editor context menu and its command could be bound to a hotkey if desired.
+
+The insert function also works with the VS Code multi-cursor function to allow several ULIDs in one operation. 
+
+> By default, the extension will insert the ULIDs in the order in which the cursors appear in the editor. This may be different to the order in which they were selected in the editor, but in most cases is going to be the desired approach. It is possible to [configure](#extension-settings) this behavior.
+
+The extension supports ULID monotonic and time-seeded generation of ULIDs. The best explanation for this can be found in the ULID spec or the README files of the libraries listed in [Requirements](#requirements).
+
 ## Requirements
 
 This extension uses the [ulidx](https://github.com/perry-mitchell/ulidx) fork of the original [ulid](https://github.com/ulid/javascript) package as it seems better maintained. 
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| vscode-ulid-generator.contextMenu.insertULID | boolean | true | Whether to show the Insert new ULID function in the editor context menu. |
+| vscode-ulid-generator.multiCursorBehavior | boolean | true | When using multiple cursors, create the ULIDs in a top-down order. |
+| vscode-ulid-generator.seedTime | integer | 0 | Enter non-zero seed time value to consistently give the same string for the time component.<br>Set to 0 for normal operation. |
+| vscode-ulid-generator.monotonic | boolean | false | Enable to generate monotonically increasing ULIDs. |
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The extension is not yet configured for use of VS Code in a web browser. The plan is to address this in the next update.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.1.0
 
-### 1.0.0
+Initial release of the ULID Generator extension.
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Support for:
+* Inserting one or more ULIDs into the current editor
+* Creating a new ULID and placing it onto the clipboard
