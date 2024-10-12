@@ -1,14 +1,32 @@
 {
   "name": "vscode-ulid-generator",
+  "version": "0.1.0",
   "displayName": "ULID Generator",
   "description": "An extension to generate Universally Unique Lexicographically Sortable Identifiers, known as ULID",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.94.0"
-  },
+  "keywords": [
+    "ULID"
+  ],
   "categories": [
     "Other"
   ],
+  "license": "MIT",
+  "icon": "images/icon.png",
+	"publisher": "motivesoft",
+	"author": {
+		"name": "ianabrown",
+		"url": "https://github.com/ianabrown"
+	},
+	"homepage": "https://github.com/Motivesoft/vscode-ulid-generator/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Motivesoft/vscode-ulid-generator.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Motivesoft/vscode-ulid-generator/issues"
+	},
+  "engines": {
+    "vscode": "^1.94.0"
+  },
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
