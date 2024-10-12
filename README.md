@@ -50,3 +50,7 @@ Initial release of the ULID Generator extension.
 Support for:
 * Inserting one or more ULIDs into the current editor
 * Creating a new ULID and placing it onto the clipboard
+
+### 0.1.1
+
+* Fix icon transparency
