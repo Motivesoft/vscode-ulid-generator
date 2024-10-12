@@ -11,19 +11,19 @@
   ],
   "license": "MIT",
   "icon": "images/icon.png",
-	"publisher": "motivesoft",
-	"author": {
-		"name": "ianabrown",
-		"url": "https://github.com/ianabrown"
-	},
-	"homepage": "https://github.com/Motivesoft/vscode-ulid-generator/blob/master/README.md",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Motivesoft/vscode-ulid-generator.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Motivesoft/vscode-ulid-generator/issues"
-	},
+  "publisher": "motivesoft",
+  "author": {
+    "name": "ianabrown",
+    "url": "https://github.com/ianabrown"
+  },
+  "homepage": "https://github.com/Motivesoft/vscode-ulid-generator/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Motivesoft/vscode-ulid-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Motivesoft/vscode-ulid-generator/issues"
+  },
   "engines": {
     "vscode": "^1.94.0"
   },
@@ -44,38 +44,38 @@
       {
         "title": "ULID Generator",
         "properties": {
-					"vscode-ulid-generator.seedTime": {
-						"type": "integer",
-						"default": 0,
-						"description": "Enter seed time to consistently give the same string for the time component. Useful when migrating to ULID"
-					},
-					"vscode-ulid-generator.monotonic": {
-						"type": "boolean",
-						"default": false,
-						"description": "Enable to generate monotonically increasing ULIDs"
-					},
-					"vscode-ulid-generator.contextMenu.insertULID": {
-						"type": "boolean",
-						"default": true,
-						"description": "Whether to show the Insert new ULID function in the editor context menu"
-					},
-					"vscode-ulid-generator.multiCursorBehavior": {
-						"type": "boolean",
-						"default": true,
-						"description": "When using multiple cursors, create the ULIDs in a top-down order"
-					}
+          "vscode-ulid-generator.seedTime": {
+            "type": "integer",
+            "default": 0,
+            "description": "Enter seed time to consistently give the same string for the time component. Useful when migrating to ULID"
+          },
+          "vscode-ulid-generator.monotonic": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable to generate monotonically increasing ULIDs"
+          },
+          "vscode-ulid-generator.contextMenu.insertULID": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to show the Insert new ULID function in the editor context menu"
+          },
+          "vscode-ulid-generator.multiCursorBehavior": {
+            "type": "boolean",
+            "default": true,
+            "description": "When using multiple cursors, create the ULIDs in a top-down order"
+          }
         }
       }
     ],
     "menus": {
-			"editor/context": [
-				{
-					"command": "vscode-ulid-generator.insert",
-					"group": "motivesoft",
-					"when": "config.vscode-ulid-generator.contextMenu.insertULID"
-				}
-			]
-		}
+      "editor/context": [
+        {
+          "command": "vscode-ulid-generator.insert",
+          "group": "motivesoft",
+          "when": "config.vscode-ulid-generator.contextMenu.insertULID"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -103,6 +103,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "ulid": "^2.3.0"
+    "ulidx": "^2.4.1"
   }
 }

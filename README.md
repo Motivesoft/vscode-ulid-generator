@@ -8,11 +8,11 @@ A comparison of the benefits of ULID over UUID and others can be found in the [c
 
 ## Features
 
-From the command palette, context menu or via a hotkey, one of more ULID can be placed into the current editor.
+From the command palette or editor context menu, one of more ULIDs can be placed into the current editor, or a single ULID placed onto the clipboard.
 
 ## Requirements
 
-...
+This extension uses the [ulidx](https://github.com/perry-mitchell/ulidx) fork of the original [ulid](https://github.com/ulid/javascript) package as it seems better maintained. 
 
 ## Extension Settings
 

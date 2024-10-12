@@ -2,8 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-import { ulid } from 'ulid';
-import { monotonicFactory } from 'ulid';
+import { ulid } from 'ulidx';
+import { monotonicFactory } from 'ulidx';
 
 const monotonicFunction = monotonicFactory();
 const ulidFunction = ulid;
