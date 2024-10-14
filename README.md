@@ -2,7 +2,7 @@
 
 This extension generates Universally Unique Lexicographically Sortable Identifiers, known as ULID.
 
-These have various advantages over other forms of unique identifiers, such as UUID, and are useful when it is desirable to have identifiers that can be meaningfully sorted.
+These have various advantages over other forms of unique identifiers, such as UUID, and are useful when it is desirable to have values that can be meaningfully ordered.
 
 A comparison of the benefits of ULID over UUID and others can be found in the [canonical ULID spec](https://github.com/ulid/spec).
 
@@ -22,6 +22,8 @@ The insert function also works with the VS Code multi-cursor function to allow s
 
 The extension supports ULID monotonic and time-seeded generation of ULIDs. The best explanation for this can be found in the ULID spec or the README files of the libraries listed in [Requirements](#requirements).
 
+This extension supports Visual Studio Code on the desktop and for the web, for example with [https://vscode.dev/](https://vscode.dev/).
+
 ## Requirements
 
 This extension uses the [ulidx](https://github.com/perry-mitchell/ulidx) fork of the original [ulid](https://github.com/ulid/javascript) package as it seems better maintained. 
@@ -39,7 +41,7 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-The extension is not yet configured for use of VS Code in a web browser. The plan is to address this in the next update.
+None at this time.
 
 ## Release Notes
 
@@ -54,3 +56,7 @@ Support for:
 ### 0.1.1
 
 * Fix icon transparency
+
+### 0.2.0
+
+* Refactored to support Visual Studio Code for the Web, see [https://vscode.dev/](https://vscode.dev/)

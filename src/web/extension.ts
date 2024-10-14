@@ -11,7 +11,13 @@ const ulidFunction = ulid;
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	console.log('"vscode-ulid-generator" is now active');
+	if (vscode.env.uiKind === vscode.UIKind.Web) {
+		console.log("'vscode-ulid-generator' is active in an web extension host");
+	} else if (vscode.env.uiKind === vscode.UIKind.Desktop) {
+		console.log("'vscode-ulid-generator' is active in an desktop extension host");
+	} else {
+		console.log("'vscode-ulid-generator' is active in an unknown extension host");
+	}
 
 	context.subscriptions.push(vscode.commands.registerCommand('vscode-ulid-generator.insert', () => {
 		const seedTime = vscode.workspace.getConfiguration().get("vscode-ulid-generator.seedTime") as number;
@@ -48,7 +54,6 @@ export function activate(context: vscode.ExtensionContext) {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('ULID copied to clipboard');
 	}));
-
 }
 
 function makeUlid(seedTime: number, useMonotonic: boolean) : string {
