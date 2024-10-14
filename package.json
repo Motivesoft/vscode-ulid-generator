@@ -28,7 +28,6 @@
     "vscode": "^1.94.0"
   },
   "activationEvents": [],
-  "main": "./dist/web/extension.js",
   "browser": "./dist/web/extension.js",
   "contributes": {
     "commands": [
