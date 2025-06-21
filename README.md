@@ -45,6 +45,18 @@ None at this time.
 
 ## Release Notes
 
+### 1.0.0
+
+Dependencies updated based on Dependabot alerty
+
+### 0.2.0
+
+* Refactored to support Visual Studio Code for the Web, see [https://vscode.dev/](https://vscode.dev/)
+
+### 0.1.1
+
+* Fix icon transparency
+
 ### 0.1.0
 
 Initial release of the ULID Generator extension.
@@ -52,11 +64,3 @@ Initial release of the ULID Generator extension.
 Support for:
 * Inserting one or more ULIDs into the current editor
 * Creating a new ULID and placing it onto the clipboard
-
-### 0.1.1
-
-* Fix icon transparency
-
-### 0.2.0
-
-* Refactored to support Visual Studio Code for the Web, see [https://vscode.dev/](https://vscode.dev/)
