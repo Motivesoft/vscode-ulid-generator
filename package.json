@@ -2,7 +2,7 @@
   "name": "vscode-ulid-generator",
   "displayName": "ULID Generator",
   "description": "An extension to generate Universally Unique Lexicographically Sortable Identifiers, known as ULID",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "ULID"
   ],
