@@ -45,9 +45,13 @@ None at this time.
 
 ## Release Notes
 
+### 1.0.1
+
+Dependencies updated based on Dependabot alert
+
 ### 1.0.0
 
-Dependencies updated based on Dependabot alerty
+Dependencies updated based on Dependabot alert
 
 ### 0.2.0
 
