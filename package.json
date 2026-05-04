@@ -43,14 +43,61 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-ulid-generator.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-ulid-generator.insert",
+        "title": "Insert new ULID"
+      },
+      {
+        "command": "vscode-ulid-generator.copy",
+        "title": "Copy new ULID to the clipboard"
       }
-    ]
+    ],
+    "configuration": [
+      {
+        "title": "ULID Generator",
+        "properties": {
+          "vscode-ulid-generator.seedTime": {
+            "type": "integer",
+            "default": 0,
+            "description": "Enter non-zero value to provide as a seed time to the algorithm. Set to 0 for normal operation."
+          },
+          "vscode-ulid-generator.monotonic": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable to generate monotonically increasing ULIDs."
+          },
+          "vscode-ulid-generator.contextMenu.insertULID": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to show the Insert new ULID function in the editor context menu."
+          },
+          "vscode-ulid-generator.multiCursorBehavior": {
+            "type": "boolean",
+            "default": true,
+            "description": "When using multiple cursors, create the ULIDs in a top-down order."
+          }
+        }
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "vscode-ulid-generator.insert",
+          "group": "motivesoft",
+          "when": "config.vscode-ulid-generator.contextMenu.insertULID"
+        }
+      ]
+    }
   },
-  "activationEvents": [
-    "onCommand:vscode-ulid-generator.helloWorld"
-  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [],
+  "dependencies": {
+    "ulidx": "^2.4.1"
+  },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/vscode": "^1.85.0",

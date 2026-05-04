@@ -2,6 +2,10 @@
 
 All notable changes to the ULID Generator extension will be documented in this file.
 
+## [1.1.0]
+
+- Re-written without using the Yoeman scaffolding tool to simplify the setup and ease maintenance
+
 ## [1.0.1]
 
 - Dependency updates
@@ -22,6 +26,7 @@ All notable changes to the ULID Generator extension will be documented in this f
 
 - Initial release
 
+[1.1.0]: https://github.com/Motivesoft/vscode-ulid-generator/releases/tag/v1.1.0
 [1.0.1]: https://github.com/Motivesoft/vscode-ulid-generator/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Motivesoft/vscode-ulid-generator/releases/tag/v1.0.0
 [0.2.0]: https://github.com/Motivesoft/vscode-ulid-generator/releases/tag/v0.2.0
