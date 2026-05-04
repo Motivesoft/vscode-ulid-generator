@@ -34,16 +34,20 @@ This extension contributes the following settings:
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| vscode-ulid-generator.contextMenu.insertULID | boolean | true | Whether to show the Insert new ULID function in the editor context menu. |
-| vscode-ulid-generator.multiCursorBehavior | boolean | true | When using multiple cursors, create the ULIDs in a top-down order. |
-| vscode-ulid-generator.seedTime | integer | 0 | Enter non-zero seed time value to consistently give the same string for the time component.<br>Set to 0 for normal operation. |
-| vscode-ulid-generator.monotonic | boolean | false | Enable to generate monotonically increasing ULIDs. |
+| `vscode-ulid-generator.contextMenu.insertULID` | boolean | `true` | Whether to show the Insert new ULID function in the editor context menu. |
+| `vscode-ulid-generator.multiCursorBehavior` | boolean | `true` | When using multiple cursors, create the ULIDs in a top-down order. |
+| `vscode-ulid-generator.seedTime` | integer | `0` | Enter non-zero seed time value to consistently give the same string for the time component.<br>Set to `0` for normal operation. |
+| `vscode-ulid-generator.monotonic` | boolean | `false` | Enable to generate monotonically increasing ULIDs. |
 
 ## Known Issues
 
 None at this time.
 
 ## Release Notes
+
+### 1.1.0
+
+Re-written without using the Yoeman scaffolding tool to simplify the setup and ease maintenance
 
 ### 1.0.1
 
